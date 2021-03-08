@@ -1,11 +1,30 @@
-window.addEventListener("DOMContenLoaded", (event) =>{
-})
+// Global Variables
+const menu = document.querySelector('div#menu')
 
-function renderAllCoffees(){
+// Fetch Functions
+
+function getAllCoffees() {
     fetch("http://localhost:3000/coffees")
     .then(response => response.json())
     .then(coffees =>{
-        console.log(coffees)
+        getOneCoffee(coffees)
     })
 }
-renderAllCoffees()
+
+// Rendering Logic
+
+function getOneCoffee(coffees) {
+    coffees.forEach(coffee => {
+        renderAllCoffees(coffee)
+    })
+}
+
+function renderAllCoffees(coffee) {
+    menu.innerHTML += `<img src=${coffee.image}>`
+}
+
+// Event Handlers
+
+// Initialize
+
+getAllCoffees()
