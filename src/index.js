@@ -1,10 +1,12 @@
 // Global Variables
+const coffeeUrl = 'http://localhost:3000/coffees'
+
 const menu = document.querySelector('div#menu')
 
 // Fetch Functions
 
 function getAllCoffees() {
-    fetch("http://localhost:3000/coffees")
+    fetch(coffeeUrl)
     .then(response => response.json())
     .then(coffees =>{
         getOneCoffee(coffees)
@@ -20,10 +22,32 @@ function getOneCoffee(coffees) {
 }
 
 function renderAllCoffees(coffee) {
-    menu.innerHTML += `<img src=${coffee.image}>`
+    image = document.createElement('img')
+    image.src = coffee.image
+    image.dataset.id = coffee.id
+    menu.append(image)
+}
+
+function renderCoffeeObj(coffee){
+    detail.querySelector("img.detail-image").src = coffee.image
+    detail.querySelector("h2.name").textContent = coffee.name
+    // form.querySelector("textarea#comment").value = ramen.comment
+    // form.dataset.id = ramen.id
 }
 
 // Event Handlers
+
+function handleMenuClick(e) {
+    if (e.target.tagName === 'IMG') {
+        fetch(`${coffeeUrl}/${e.target.dataset.id}`)
+        .then(response => response.json())
+        .then(coffee => renderCoffeeObj(coffee))
+    }
+}
+
+// Event Listeners
+
+menu.addEventListener('click', handleMenuClick)
 
 // Initialize
 
