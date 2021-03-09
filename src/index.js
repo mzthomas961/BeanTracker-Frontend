@@ -1,8 +1,10 @@
 // Global Variables
 const coffeeUrl = 'http://localhost:3000/coffees'
+const orderUrl ='http://localhost:3000/orders'
 
 const menu = document.querySelector('div#menu')
 const commentForm = document.querySelector('form#coffee-comment')
+const cart = document.querySelector("ul#cart")
 
 // Fetch Functions
 
@@ -13,9 +15,36 @@ function getAllCoffees() {
         getOneCoffee(coffees)
     })
 }
+function getAllOrders(){
+    fetch(orderUrl)
+    .then(response => response.json())
+    .then(orders =>{
+        getOneOrder(orders)
+    })
+}
 
 // Rendering Logic
+function getOneOrder(orders){
+    orders.forEach(order => {
+        renderAllOrders(order)
+    })
+}
 
+function renderAllOrders(order){
+    id = order.coffee_id
+    
+    fetch(`${coffeeUrl}/${id}`)
+    .then(r => r.json())
+    .then(coffee => {
+        cart.innerHTML += `<li id = ${order.id}>
+        <h1> Coffee: ${coffee.name} </h1>
+        </li>`
+    })
+
+   
+    
+
+}
 function getOneCoffee(coffees) {
     coffees.forEach(coffee => {
         renderAllCoffees(coffee)
@@ -68,3 +97,4 @@ commentForm.addEventListener('submit', handleFormSubmission)
 // Initialize
 
 getAllCoffees()
+getAllOrders()
