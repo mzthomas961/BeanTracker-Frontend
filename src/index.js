@@ -16,7 +16,7 @@ function getAllCoffees() {
     })
 }
 function getAllOrders(){
-    fetch(orderUrl)
+    fetch(orderUrl)``
     .then(response => response.json())
     .then(orders =>{
         getOneOrder(orders)
