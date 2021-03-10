@@ -109,4 +109,4 @@ menu.addEventListener('click', handleMenuClick)
 getAllCoffees()
 getAllOrders()
 handleFormSubmission()
-// test
+// testing
