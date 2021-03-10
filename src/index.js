@@ -105,9 +105,9 @@ function handleDeleteButton(e){
      id = e.target.id
     //  liRemove = document.(`li#${id}`)
     orderLi.remove()
-    fetch(`orderUrl/${id}`)
-    .then(response => response.json())
-    .then(order => console.log(order))
+    fetch(`${orderUrl}/${id}`,{
+    method: 'DELETE'
+    })
 }
 
 // Event Listeners
