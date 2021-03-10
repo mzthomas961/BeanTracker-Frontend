@@ -98,23 +98,24 @@ function handleFormSubmission(e) {
     
 }
 function handleDeleteAndUpdateButton(e){
-    if (e.target.matches(".delete-btn"))
+    if (e.target.matches(".delete-btn")){
      orderLi = e.target.closest("li")
-     debugger
+    //  debugger
      id = e.target.id
     orderLi.remove()
     fetch(`${orderUrl}/${id}`,{
     method: 'DELETE'
-    })
-    elseif (e.target.matches(".update-btn"))
-     noteInput = e.target.note.value
+    })}
+    else if (e.target.matches(".update-btn"))
+     noteInput = document.querySelector("textarea#note")
+     noteUpdate = noteInput.value
      id = e.target.id
     fetch(`${orderUrl}/${id}`,{
     method: 'PATCH',
     headers: {
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({note:noteInput})
+    body: JSON.stringify({note:noteUpdate})
     })
     .then(r => r.json())
     .then(updateObj => console.log(updateObj))
