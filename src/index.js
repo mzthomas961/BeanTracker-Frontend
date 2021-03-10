@@ -97,30 +97,38 @@ function handleFormSubmission(e) {
     .then(newOrder => console.log(newOrder))
     
 }
-function handleDeleteButton(e){
+function handleDeleteAndUpdateButton(e){
     if (e.target.matches(".delete-btn"))
      orderLi = e.target.closest("li")
+     debugger
      id = e.target.id
     orderLi.remove()
-    fetch(`${orderUrl}/${id}`)
-    .then(response => response.json())
-    .then(order => console.log(order))
+    fetch(`${orderUrl}/${id}`,{
+    method: 'DELETE'
+    })
+    elseif (e.target.matches(".update-btn"))
+     noteInput = e.target.note.value
+     id = e.target.id
+    fetch(`${orderUrl}/${id}`,{
+    method: 'PATCH',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({note:noteInput})
+    })
+    .then(r => r.json())
+    .then(updateObj => console.log(updateObj))
 }
 
-function
 
 // Event Listeners
 
 menu.addEventListener('click', handleMenuClick)
 commentForm.addEventListener('submit', handleFormSubmission)
-cart.addEventListener('click', handleDeleteButton)
-cart.addEventListener('click', handleUpdateButton)
+cart.addEventListener('click', handleDeleteAndUpdateButton)
+
 
 // Initialize
 
 getAllCoffees()
 getAllOrders()
-
-
-
-// test
