@@ -4,7 +4,8 @@ const orderUrl ='http://localhost:3000/orders'
 
 const menu = document.querySelector('div#menu')
 const commentForm = document.querySelector('form#coffee-comment')
-const cart = document.querySelector("ul#cart")
+const cart = document.querySelector("ol#cart")
+
 
 // Fetch Functions
 
@@ -36,10 +37,11 @@ function renderAllOrders(order){
     fetch(`${coffeeUrl}/${id}`)
     .then(r => r.json())
     .then(coffee => {
-        cart.innerHTML += `<li id = ${order.id}>
+        cart.innerHTML += `<li class = "order" id = ${order.id}>
         <h2> Coffee: ${coffee.name} </h1>
         <h2> Note: ${order.note} </h2>
         <h4> Date/Time: ${order.date} </h2>
+        <button class = "delete-btn" id = ${order.id}> Delete </button>
         </li>`
     })
 
@@ -97,11 +99,22 @@ function handleFormSubmission(e) {
     .then(newOrder => console.log(newOrder))
     
 }
+function handleDeleteButton(e){
+    if (e.target.matches(".delete-btn"))
+     orderLi = e.target.closest("li")
+     id = e.target.id
+    //  liRemove = document.(`li#${id}`)
+    orderLi.remove()
+    fetch(`orderUrl/${id}`)
+    .then(response => response.json())
+    .then(order => console.log(order))
+}
 
 // Event Listeners
 
 menu.addEventListener('click', handleMenuClick)
 commentForm.addEventListener('submit', handleFormSubmission)
+cart.addEventListener('click', handleDeleteButton)
 
 // Initialize
 
