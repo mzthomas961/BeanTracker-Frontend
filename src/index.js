@@ -107,7 +107,5 @@ commentForm.addEventListener('submit', handleFormSubmission)
 
 getAllCoffees()
 getAllOrders()
-
-
-
-// test
+handleFormSubmission()
+// testing
