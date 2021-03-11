@@ -85,10 +85,12 @@ function handleMenuClick(e) {
 
     }
 }
-// 
+
 function handleFormSubmission(e) {
+    e.preventDefault()
     note = e.target[0].value
     date = e.target[1].value
+    console.log(date)
     user_id = 1
     coffee_id = e.target.dataset.id
 
@@ -107,7 +109,6 @@ function handleFormSubmission(e) {
 function handleDeleteAndUpdateButton(e){
     if (e.target.matches(".delete-btn")){
      orderLi = e.target.closest("li")
-    //  debugger
      id = e.target.id
     orderLi.remove()
     fetch(`${orderUrl}/${id}`,{
