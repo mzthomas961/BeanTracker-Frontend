@@ -5,6 +5,9 @@ const orderUrl ='http://localhost:3000/orders'
 const menu = document.querySelector('div#menu')
 const commentForm = document.querySelector('form#coffee-comment')
 const cart = document.querySelector("ol#cart")
+const divDetail = document.querySelector("div#detail")
+const span = document.querySelector("span")
+const closeModal = document.getElementById("deletebutton")
 
 
 // Fetch Functions
@@ -54,6 +57,7 @@ function getOneCoffee(coffees) {
     })
 }
 
+
 function renderAllCoffees(coffee) {
     image = document.createElement('img')
     image.src = coffee.image
@@ -64,6 +68,9 @@ function renderAllCoffees(coffee) {
 function renderCoffeeObj(coffee){
     detail.querySelector("img.detail-image").src = coffee.image
     detail.querySelector("h2.name").textContent = coffee.name
+    divDetail.style.display = "block";
+
+
     // form.querySelector("textarea#comment").value = ramen.comment
     commentForm.dataset.id = coffee.id
 }
@@ -75,11 +82,11 @@ function handleMenuClick(e) {
         fetch(`${coffeeUrl}/${e.target.dataset.id}`)
         .then(response => response.json())
         .then(coffee => renderCoffeeObj(coffee))
+
     }
 }
 // 
 function handleFormSubmission(e) {
-    e.preventDefault()
     note = e.target[0].value
     date = e.target[1].value
     user_id = 1
@@ -127,6 +134,9 @@ function handleDeleteAndUpdateButton(e){
 menu.addEventListener('click', handleMenuClick)
 commentForm.addEventListener('submit', handleFormSubmission)
 cart.addEventListener('click', handleDeleteAndUpdateButton)
+closeModal.onclick = function() {
+    divDetail.style.display = "none";
+}
 
 
 // Initialize
