@@ -45,6 +45,7 @@
   
   .detail-image {
     height: 350px;
+    width: 450px;
   }/*
   
   .name,
@@ -146,6 +147,7 @@ Modal Content */
   text-decoration: none;
   cursor: pointer;
 }
+.detail-image
 /* </style>
 </head>
 <body> */ 

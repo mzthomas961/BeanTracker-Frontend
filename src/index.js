@@ -1,3 +1,5 @@
+// const moment = require("moment")    
+
 // Global Variables
 const coffeeUrl = 'http://localhost:3000/coffees'
 const orderUrl ='http://localhost:3000/orders'
@@ -44,7 +46,7 @@ function renderAllOrders(order){
         <h2> Coffee: ${coffee.name} </h1>
         <label for="note"> Note: </label>
         <textarea name="note" id="note"> ${order.note} </textarea>
-        <h4> Date/Time: ${order.date} </h2>
+        <h4> Pickup Time: ${order.date} </h2>
         <button class = "update-btn" id = ${order.id}> Update </button>
         <button class = "delete-btn" id = ${order.id}> Delete </button>
         </li>`
@@ -143,3 +145,4 @@ closeModal.onclick = function() {
 
 getAllCoffees()
 getAllOrders()
+
