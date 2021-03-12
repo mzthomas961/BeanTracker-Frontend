@@ -62,12 +62,18 @@ function getOneCoffee(coffees) {
 
 function renderAllCoffees(coffee) {
     image = document.createElement('img')
-    image.src = coffee.image
+    // image.src = coffee.image
     image.dataset.id = coffee.id
-    menu.append(image)
+    // menu.append(image)
+    menu.innerHTML += `
+    <figure>
+    <img title = ${coffee.name}  data-id = ${coffee.id} src = ${coffee.image} /img>  
+    <figcaption> ${coffee.name} </figcaption>
+    </figure>`
 }
 
 function renderCoffeeObj(coffee){
+    console.log(coffee)
     detail.querySelector("img.detail-image").src = coffee.image
     detail.querySelector("h2.name").textContent = coffee.name
     divDetail.style.display = "block";
